@@ -1,22 +1,27 @@
-import { useState } from 'react';
 import { Card, CardHeader, CardBody, TimelineItem, Tip } from '../components';
 
+const EVENT_DATE = '2026-06-19';
+
 const SCHEDULE = [
-  { date: 'Ochtend (vóór school)', title: 'Opbouwen tafels & boeken uitstallen', desc: 'Tafels klaarzetten, boeken op categorie uitleggen, borden ophangen, wisselgeld klaarzetten.' },
-  { date: 'Sessie 1 · bijv. 14:30–15:30', title: 'Eerste verkoopsessie', desc: 'Kinderen + ouders welkom. Zorg dat er altijd iemand bij de kassa staat. Noteer de opbrengst per categorie.' },
-  { date: 'Tussenpauze', title: 'Aanvullen & opruimen', desc: 'Gaten opvullen, gevallen boeken rechtzetten, geld tellen.' },
-  { date: 'Sessie 2 · bijv. 15:30–16:30', title: 'Tweede verkoopsessie', desc: 'Eventueel prijzen verlagen voor boeken die er nog veel zijn. Zorg voor speelse sfeer.' },
-  { date: 'Na sessie 2', title: 'Afbreken & geld tellen', desc: 'Dozen met resterende boeken klaar. Totale opbrengst noteren. Locatie achterlaten zoals gevonden.' },
+  { date: 'Ochtend (vóór school)', title: 'Opbouwen tafels & boeken uitstallen', desc: 'Tafels klaarzetten, boeken op categorie uitleggen, borden ophangen, wisselgeld klaarzetten.', startHour: 7, endHour: 14 },
+  { date: 'Sessie 1 · bijv. 14:30–15:30', title: 'Eerste verkoopsessie', desc: 'Kinderen + ouders welkom. Zorg dat er altijd iemand bij de kassa staat. Noteer de opbrengst per categorie.', startHour: 14.5, endHour: 15.5 },
+  { date: 'Tussenpauze', title: 'Aanvullen & opruimen', desc: 'Gaten opvullen, gevallen boeken rechtzetten, geld tellen.', startHour: 15.5, endHour: 15.75 },
+  { date: 'Sessie 2 · bijv. 15:45–16:30', title: 'Tweede verkoopsessie', desc: 'Eventueel prijzen verlagen voor boeken die er nog veel zijn. Zorg voor speelse sfeer.', startHour: 15.75, endHour: 16.5 },
+  { date: 'Na sessie 2', title: 'Afbreken & geld tellen', desc: 'Dozen met resterende boeken klaar. Totale opbrengst noteren. Locatie achterlaten zoals gevonden.', startHour: 16.5, endHour: 24 },
 ];
 
-export default function DayOfPage({ onAction }) {
-  const [done, setDone] = useState(Array(SCHEDULE.length).fill(false));
+function getScheduleStatus(startHour, endHour) {
+  const now = new Date();
+  const today = now.toISOString().slice(0, 10);
+  if (today < EVENT_DATE) return 'future';
+  if (today > EVENT_DATE) return 'done';
+  const currentHour = now.getHours() + now.getMinutes() / 60;
+  if (currentHour >= endHour) return 'done';
+  if (currentHour >= startHour) return 'current';
+  return 'future';
+}
 
-  const toggleStep = (i) => {
-    setDone(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
-    onAction();
-  };
-
+export default function DayOfPage() {
   return (
     <div className="page">
       <Card>
@@ -24,7 +29,7 @@ export default function DayOfPage({ onAction }) {
         <CardBody>
           <div className="timeline">
             {SCHEDULE.map((item, i) => (
-              <TimelineItem key={i} {...item} done={done[i]} onToggle={() => toggleStep(i)} />
+              <TimelineItem key={i} {...item} status={getScheduleStatus(item.startHour, item.endHour)} />
             ))}
           </div>
         </CardBody>
