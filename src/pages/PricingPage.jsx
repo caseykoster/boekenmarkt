@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Card, CardHeader, CardBody, ChecklistItem } from '../components';
+import { Card, CardHeader, CardBody } from '../components';
 
 const PRICES = [
   { category: 'Prentenboek', price: '€0,50', example: 'Kleine kleuter boekjes' },
@@ -10,20 +9,7 @@ const PRICES = [
   { category: 'Tijdschrift/comic', price: '€0,50', example: 'Donald Duck, etc.' },
 ];
 
-const STICKER_ITEMS = [
-  { text: 'Gekleurde stickers per categorie', meta: 'Bijv. geel = €0,50 · groen = €1,– · oranje = €2,–' },
-  { text: 'Prijsbord per tafel of categorie', meta: 'Groot leesbaar bord "Alle boeken €1,–" o.i.d.' },
-  { text: 'Stickers kopen / uitprinten', meta: 'Kleurcodering spaart tijd op de dag zelf' },
-];
-
-export default function PricingPage({ onAction }) {
-  const [checked, setChecked] = useState(Array(STICKER_ITEMS.length).fill(false));
-
-  const toggle = (i) => {
-    setChecked(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
-    onAction();
-  };
-
+export default function PricingPage() {
   return (
     <div className="page">
       <Card>
@@ -38,17 +24,6 @@ export default function PricingPage({ onAction }) {
               </div>
             ))}
           </div>
-        </CardBody>
-      </Card>
-
-      <Card>
-        <CardHeader icon="🏷️" title="Prijsstickers praktisch" />
-        <CardBody>
-          <ul className="checklist">
-            {STICKER_ITEMS.map((item, i) => (
-              <ChecklistItem key={i} {...item} done={checked[i]} onToggle={() => toggle(i)} />
-            ))}
-          </ul>
         </CardBody>
       </Card>
     </div>
