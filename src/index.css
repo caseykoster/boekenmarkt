@@ -209,12 +209,10 @@ body {
   user-select: none;
 }
 .tl-item.done .tl-dot { background: var(--sage); border-color: var(--sage); color: white; }
-.tl-item.urgent .tl-dot { border-color: var(--red); color: var(--red); }
 .tl-content { flex: 1; padding-top: 4px; }
 .tl-date { font-size: 0.72rem; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
 .tl-title { font-size: 0.9rem; font-weight: 500; margin: 2px 0; }
 .tl-desc { font-size: 0.8rem; color: #666; line-height: 1.4; }
-.tl-item.urgent .tl-date { color: var(--red); }
 
 /* ── ROLE CARDS ── */
 .role-card {
