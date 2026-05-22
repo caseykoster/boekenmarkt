@@ -69,6 +69,13 @@ body {
   border-bottom-color: var(--green);
 }
 
+@media (max-width: 540px) {
+  .tabs { flex-direction: column; align-items: stretch; }
+  .app-brand { font-size: 1.4rem; padding: 10px 16px 8px; }
+  .tabs-row { justify-content: flex-start; border-top: 1px solid var(--border); }
+  .tabs-row button { flex: 1; font-size: 0.75rem; padding: 10px 6px; letter-spacing: 0.02em; }
+}
+
 /* ── PAGE ── */
 .page {
   padding: 20px 16px 80px;
