@@ -6,8 +6,7 @@ export default function SignupRow({ page, itemIndex, maxVolunteers, signups, onR
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const active = signups.filter(s => !s.removal_requested);
-  const remaining = maxVolunteers - active.length;
+  const remaining = maxVolunteers - signups.length;
   const isFull = remaining <= 0;
 
   const handleSignup = async () => {
@@ -21,20 +20,12 @@ export default function SignupRow({ page, itemIndex, maxVolunteers, signups, onR
     onRefresh();
   };
 
-  const handleRemovalRequest = async (id) => {
-    await supabase.from('signups').update({ removal_requested: true }).eq('id', id);
-    onRefresh();
-  };
-
   return (
     <div className="signup-row" onClick={e => e.stopPropagation()}>
-      {active.length > 0 && (
+      {signups.length > 0 && (
         <div className="signup-names">
-          {active.map(s => (
-            <span key={s.id} className="signup-name">
-              {s.name}
-              <button className="removal-btn" title="Vraag om verwijdering" onClick={() => handleRemovalRequest(s.id)}>×</button>
-            </span>
+          {signups.map(s => (
+            <span key={s.id} className="signup-name">{s.name}</span>
           ))}
         </div>
       )}

@@ -259,13 +259,6 @@ body {
   padding: 3px 8px;
   border-radius: 20px;
 }
-.removal-btn {
-  background: none; border: none;
-  color: #aaa; font-size: 0.85rem;
-  cursor: pointer; padding: 0;
-  line-height: 1;
-}
-.removal-btn:hover { color: var(--red); }
 .signup-footer { display: flex; align-items: center; }
 .signup-status-row {
   display: flex; align-items: center; gap: 10px;
