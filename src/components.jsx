@@ -25,35 +25,41 @@ export function Tip({ icon = '💡', children }) {
 }
 
 // ── ChecklistItem ──
-export function ChecklistItem({ text, meta, done, onToggle }) {
+export function ChecklistItem({ text, meta, done, onToggle, extra }) {
   return (
-    <li className={done ? 'done' : ''} onClick={onToggle}>
-      <div className={`check-box ${done ? 'checked' : ''}`}>{done ? '✓' : ''}</div>
-      <div>
-        <div className="item-text">{text}</div>
-        {meta && <div className="item-meta">{meta}</div>}
+    <li className={done ? 'done' : ''}>
+      <div className="checklist-main" onClick={onToggle}>
+        <div className={`check-box ${done ? 'checked' : ''}`}>{done ? '✓' : ''}</div>
+        <div>
+          <div className="item-text">{text}</div>
+          {meta && <div className="item-meta">{meta}</div>}
+        </div>
       </div>
+      {extra}
     </li>
   );
 }
 
 // ── TimelineItem ──
-export function TimelineItem({ date, title, desc, done, status, onToggle }) {
+export function TimelineItem({ date, title, desc, done, status, onToggle, extra }) {
   const s = status ?? (done ? 'done' : 'future');
   return (
-    <div className={`tl-item ${s}`}>
-      <div
-        className="tl-dot"
-        onClick={onToggle}
-        style={{ cursor: onToggle ? 'pointer' : 'default' }}
-      >
-        {s === 'done' ? '✓' : '→'}
+    <>
+      <div className={`tl-item ${s}`}>
+        <div
+          className="tl-dot"
+          onClick={onToggle}
+          style={{ cursor: onToggle ? 'pointer' : 'default' }}
+        >
+          {s === 'done' ? '✓' : '→'}
+        </div>
+        <div className="tl-content">
+          <div className="tl-date">{date}</div>
+          <div className="tl-title">{title}</div>
+          <div className="tl-desc">{desc}</div>
+        </div>
       </div>
-      <div className="tl-content">
-        <div className="tl-date">{date}</div>
-        <div className="tl-title">{title}</div>
-        <div className="tl-desc">{desc}</div>
-      </div>
-    </div>
+      {extra && <div className="tl-extra">{extra}</div>}
+    </>
   );
 }
