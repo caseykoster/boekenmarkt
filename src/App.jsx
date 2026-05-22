@@ -28,22 +28,19 @@ export default function App() {
 
   return (
     <>
-      <header className="app-header">
-        <h1>📚 Boeken<span>markt</span></h1>
-        <div className="date-badge">19 juni · 2 sessies</div>
-      </header>
-
       <nav className="tabs">
-        {TABS.map(tab => (
-          <button
-            key={tab.id}
-            className={active === tab.id ? 'active' : ''}
-            onClick={() => setActive(tab.id)}
-          >
-            <span className="tab-icon">{tab.icon}</span>
-            {tab.label}
-          </button>
-        ))}
+        <div className="app-brand">Boeken<span>markt</span></div>
+        <div className="tabs-row">
+          {TABS.map(tab => (
+            <button
+              key={tab.id}
+              className={active === tab.id ? 'active' : ''}
+              onClick={() => setActive(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </nav>
 
       {ActiveComponent && <ActiveComponent onAction={flashToast} />}
