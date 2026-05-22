@@ -1,13 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import PrepPage from './pages/PrepPage';
-import SortPage from './pages/SortPage';
 import PricingPage from './pages/PricingPage';
 import DayOfPage from './pages/DayOfPage';
 import TeamPage from './pages/TeamPage';
 
 const TABS = [
   { id: 'prep',    icon: '📋', label: 'Prep',     Component: PrepPage },
-  { id: 'sort',    icon: '🔍', label: 'Sorteren', Component: SortPage },
   { id: 'pricing', icon: '💰', label: 'Prijzen',  Component: PricingPage },
   { id: 'dayof',   icon: '🗓️', label: 'Dag van',  Component: DayOfPage },
   { id: 'team',    icon: '👥', label: 'Team',     Component: TeamPage },
