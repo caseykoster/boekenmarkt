@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardHeader, CardBody, ChecklistItem, Tip } from '../components';
+import { Card, CardHeader, CardBody, ChecklistItem } from '../components';
 
 const PRICES = [
   { category: 'Prentenboek', price: '€0,50', example: 'Kleine kleuter boekjes' },
@@ -40,10 +40,6 @@ export default function PricingPage({ onAction }) {
           </div>
         </CardBody>
       </Card>
-
-      <Tip icon="📌">
-        Prijzen afstemmen met de organisatie. Doel is <strong>laagdrempelig</strong> — het gaat om het goede doel en hergebruik, niet om winst maximaliseren.
-      </Tip>
 
       <Card>
         <CardHeader icon="🏷️" title="Prijsstickers praktisch" />
