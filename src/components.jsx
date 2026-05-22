@@ -38,10 +38,17 @@ export function ChecklistItem({ text, meta, done, onToggle }) {
 }
 
 // ── TimelineItem ──
-export function TimelineItem({ date, title, desc, done, urgent, onToggle }) {
+export function TimelineItem({ date, title, desc, done, status, onToggle }) {
+  const s = status ?? (done ? 'done' : 'future');
   return (
-    <div className={`tl-item ${done ? 'done' : ''}`}>
-      <div className="tl-dot" onClick={onToggle}>{done ? '✓' : '→'}</div>
+    <div className={`tl-item ${s}`}>
+      <div
+        className="tl-dot"
+        onClick={onToggle}
+        style={{ cursor: onToggle ? 'pointer' : 'default' }}
+      >
+        {s === 'done' ? '✓' : '→'}
+      </div>
       <div className="tl-content">
         <div className="tl-date">{date}</div>
         <div className="tl-title">{title}</div>
