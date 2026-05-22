@@ -11,25 +11,11 @@ const SCHEDULE = [
 
 export default function DayOfPage({ onAction }) {
   const [done, setDone] = useState(Array(SCHEDULE.length).fill(false));
-  const [revenues, setRevenues] = useState([]);
-  const [revLabel, setRevLabel] = useState('');
-  const [revAmount, setRevAmount] = useState('');
 
   const toggleStep = (i) => {
     setDone(prev => { const n = [...prev]; n[i] = !n[i]; return n; });
     onAction();
   };
-
-  const addRevenue = () => {
-    const label = revLabel.trim();
-    const amount = parseFloat(revAmount);
-    if (!label || isNaN(amount)) return;
-    setRevenues(prev => [...prev, { label, amount }]);
-    setRevLabel(''); setRevAmount('');
-    onAction();
-  };
-
-  const total = revenues.reduce((s, r) => s + r.amount, 0);
 
   return (
     <div className="page">
@@ -40,41 +26,6 @@ export default function DayOfPage({ onAction }) {
             {SCHEDULE.map((item, i) => (
               <TimelineItem key={i} {...item} done={done[i]} onToggle={() => toggleStep(i)} />
             ))}
-          </div>
-        </CardBody>
-      </Card>
-
-      <Card>
-        <CardHeader icon="🧾" title="Opbrengst bijhouden" />
-        <CardBody>
-          {revenues.map((r, i) => (
-            <div key={i} className="revenue-row">
-              <span>{r.label}</span>
-              <span style={{ fontWeight: 500 }}>€{r.amount.toFixed(2).replace('.', ',')}</span>
-            </div>
-          ))}
-          <div className="revenue-input-row" style={{ marginTop: revenues.length ? 10 : 0 }}>
-            <input
-              className="label-input"
-              placeholder="Categorie…"
-              value={revLabel}
-              onChange={e => setRevLabel(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && addRevenue()}
-            />
-            <input
-              className="amount-input"
-              placeholder="€"
-              type="number"
-              min="0"
-              step="0.5"
-              value={revAmount}
-              onChange={e => setRevAmount(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && addRevenue()}
-            />
-            <button onClick={addRevenue}>+</button>
-          </div>
-          <div className="revenue-total">
-            Totaal: <span>€{total.toFixed(2).replace('.', ',')}</span>
           </div>
         </CardBody>
       </Card>

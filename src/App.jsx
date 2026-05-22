@@ -6,8 +6,8 @@ import TeamPage from './pages/TeamPage';
 
 const TABS = [
   { id: 'prep',    icon: '📋', label: 'Prep',     Component: PrepPage },
-  { id: 'pricing', icon: '💰', label: 'Prijzen',  Component: PricingPage },
   { id: 'dayof',   icon: '🗓️', label: 'Dag van',  Component: DayOfPage },
+  { id: 'pricing', icon: '💰', label: 'Prijzen',  Component: PricingPage },
   { id: 'team',    icon: '👥', label: 'Team',     Component: TeamPage },
 ];
 
