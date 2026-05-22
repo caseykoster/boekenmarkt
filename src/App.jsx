@@ -3,14 +3,12 @@ import TimelinePage from './pages/TimelinePage';
 import PrepPage from './pages/PrepPage';
 import PricingPage from './pages/PricingPage';
 import DayOfPage from './pages/DayOfPage';
-import TeamPage from './pages/TeamPage';
 
 const TABS = [
   { id: 'timeline', icon: '🗓️', label: 'Tijdlijn', Component: TimelinePage },
   { id: 'prep',    icon: '📋', label: 'Prep',     Component: PrepPage },
   { id: 'dayof',   icon: '🗓️', label: 'Dag van',  Component: DayOfPage },
   { id: 'pricing', icon: '💰', label: 'Prijzen',  Component: PricingPage },
-  { id: 'team',    icon: '👥', label: 'Team',     Component: TeamPage },
 ];
 
 export default function App() {
