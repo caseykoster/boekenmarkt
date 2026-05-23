@@ -10,10 +10,17 @@ export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, s
   const remaining = maxVolunteers - signups.length;
   const isFull = remaining <= 0;
 
+  const dismissInput = () => {
+    document.activeElement?.blur();
+    setShowInput(false);
+    setName('');
+  };
+
   const handleSignup = async () => {
     const trimmed = name.trim();
     if (!trimmed) return;
     setLoading(true);
+    document.activeElement?.blur();
     await supabase.from('signups').insert({ page, item_index: itemIndex, name: trimmed });
     setName('');
     setShowInput(false);
@@ -67,10 +74,10 @@ export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, s
               placeholder="Jouw naam…"
               value={name}
               onChange={e => setName(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') handleSignup(); if (e.key === 'Escape') { setShowInput(false); setName(''); } }}
+              onKeyDown={e => { if (e.key === 'Enter') handleSignup(); if (e.key === 'Escape') dismissInput(); }}
             />
             <button className="signup-confirm" onClick={handleSignup} disabled={loading}>✓</button>
-            <button className="signup-cancel" onClick={() => { setShowInput(false); setName(''); }}>✕</button>
+            <button className="signup-cancel" onClick={dismissInput}>✕</button>
           </div>
         ) : (
           <div className="signup-status-row">
