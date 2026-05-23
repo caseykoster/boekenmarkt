@@ -320,9 +320,9 @@ body {
 }
 .remove-modal {
   background: white; border-radius: 14px;
-  padding: 28px 32px; max-width: 340px; width: 90%;
+  padding: 24px 20px; max-width: 320px; width: calc(100vw - 40px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-  text-align: center;
+  text-align: center; box-sizing: border-box;
 }
 .remove-modal-name {
   font-size: 1.4rem; font-weight: 700;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from './supabase';
 
 export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, signups, onRefresh }) {
@@ -20,6 +20,11 @@ export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, s
     setLoading(false);
     onRefresh();
   };
+
+  useEffect(() => {
+    document.body.style.overflow = confirmRemove ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [confirmRemove]);
 
   const handleRemove = async () => {
     if (!confirmRemove) return;
