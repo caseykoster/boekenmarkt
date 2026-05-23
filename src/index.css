@@ -303,3 +303,48 @@ body {
 }
 .signup-confirm { background: var(--green); color: white; }
 .signup-cancel { background: #eee; color: #555; }
+.removal-btn {
+  background: none; border: none;
+  color: #aaa; font-size: 0.9rem;
+  cursor: pointer; padding: 0 0 0 2px;
+  line-height: 1; display: inline-flex; align-items: center;
+}
+.removal-btn:hover { color: var(--red, #c0392b); }
+
+/* ── REMOVE CONFIRMATION MODAL ── */
+.remove-modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.remove-modal {
+  background: white; border-radius: 14px;
+  padding: 28px 32px; max-width: 340px; width: 90%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  text-align: center;
+}
+.remove-modal-name {
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--green-dark); margin: 0 0 6px;
+}
+.remove-modal-task {
+  font-size: 0.9rem; color: #555; margin: 0 0 22px;
+}
+.remove-modal-actions {
+  display: flex; gap: 10px; justify-content: center;
+}
+.remove-modal-cancel {
+  background: #eee; color: #555; border: none;
+  border-radius: 20px; padding: 8px 20px;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 0.85rem; cursor: pointer;
+}
+.remove-modal-cancel:hover { background: #ddd; }
+.remove-modal-confirm {
+  background: var(--red, #c0392b); color: white; border: none;
+  border-radius: 20px; padding: 8px 20px;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+}
+.remove-modal-confirm:hover { background: #a93226; }

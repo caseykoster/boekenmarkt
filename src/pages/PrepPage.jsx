@@ -63,6 +63,7 @@ export default function PrepPage({ onAction }) {
                   <SignupRow
                     page="prep"
                     itemIndex={i}
+                    taskLabel={item.text}
                     maxVolunteers={item.maxVolunteers}
                     signups={signups.filter(s => s.item_index === i)}
                     onRefresh={fetchSignups}

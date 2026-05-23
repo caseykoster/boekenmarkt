@@ -49,6 +49,7 @@ export default function DayOfPage() {
                   <SignupRow
                     page="dagvan"
                     itemIndex={i}
+                    taskLabel={item.title}
                     maxVolunteers={item.maxVolunteers}
                     signups={signups.filter(s => s.item_index === i)}
                     onRefresh={fetchSignups}

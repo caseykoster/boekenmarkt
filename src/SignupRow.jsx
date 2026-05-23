@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { supabase } from './supabase';
 
-export default function SignupRow({ page, itemIndex, maxVolunteers, signups, onRefresh }) {
+export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, signups, onRefresh }) {
   const [showInput, setShowInput] = useState(false);
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [confirmRemove, setConfirmRemove] = useState(null); // signup object to remove
 
   const remaining = maxVolunteers - signups.length;
   const isFull = remaining <= 0;
@@ -20,12 +21,34 @@ export default function SignupRow({ page, itemIndex, maxVolunteers, signups, onR
     onRefresh();
   };
 
+  const handleRemove = async () => {
+    if (!confirmRemove) return;
+    await supabase.from('signups').delete().eq('id', confirmRemove.id);
+    setConfirmRemove(null);
+    onRefresh();
+  };
+
   return (
     <div className="signup-row" onClick={e => e.stopPropagation()}>
+      {confirmRemove && (
+        <div className="remove-modal-backdrop" onClick={() => setConfirmRemove(null)}>
+          <div className="remove-modal" onClick={e => e.stopPropagation()}>
+            <p className="remove-modal-name">{confirmRemove.name}</p>
+            <p className="remove-modal-task">verwijderen uit <strong>{taskLabel}</strong>?</p>
+            <div className="remove-modal-actions">
+              <button className="remove-modal-cancel" onClick={() => setConfirmRemove(null)}>Annuleer</button>
+              <button className="remove-modal-confirm" onClick={handleRemove}>Verwijderen</button>
+            </div>
+          </div>
+        </div>
+      )}
       {signups.length > 0 && (
         <div className="signup-names">
           {signups.map(s => (
-            <span key={s.id} className="signup-name">{s.name}</span>
+            <span key={s.id} className="signup-name">
+              {s.name}
+              <button className="removal-btn" title="Verwijder aanmelding" onClick={() => setConfirmRemove(s)}>×</button>
+            </span>
           ))}
         </div>
       )}
