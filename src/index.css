@@ -288,12 +288,13 @@ body {
 }
 .signup-input-row {
   display: flex; gap: 6px; align-items: center;
+  min-width: 0; max-width: 100%;
 }
 .signup-input-row input {
   border: 1px solid var(--border); border-radius: 8px;
   padding: 6px 10px; font-size: 0.82rem;
   font-family: 'Merriweather Sans', sans-serif;
-  flex: 1;
+  flex: 1; min-width: 0;
 }
 .signup-input-row input:focus { outline: 2px solid var(--green); border-color: transparent; }
 .signup-confirm, .signup-cancel {

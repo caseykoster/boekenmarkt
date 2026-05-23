@@ -6,24 +6,15 @@ export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, s
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
   const [confirmRemove, setConfirmRemove] = useState(null); // signup object to remove
-  const scrollYRef = useRef(0);
   const inputRef = useRef(null);
 
   const remaining = maxVolunteers - signups.length;
   const isFull = remaining <= 0;
 
-  const openInput = () => {
-    scrollYRef.current = window.scrollY;
-    setShowInput(true);
-  };
-
   const dismissInput = () => {
     inputRef.current?.blur();
     setShowInput(false);
     setName('');
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: scrollYRef.current, behavior: 'instant' });
-    });
   };
 
   const handleSignup = async () => {
@@ -35,9 +26,6 @@ export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, s
     setName('');
     setShowInput(false);
     setLoading(false);
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: scrollYRef.current, behavior: 'instant' });
-    });
     onRefresh();
   };
 
@@ -96,7 +84,7 @@ export default function SignupRow({ page, itemIndex, taskLabel, maxVolunteers, s
         ) : (
           <div className="signup-status-row">
             <span className="signup-needed">Nog {remaining} {remaining === 1 ? 'vrijwilliger' : 'vrijwilligers'} nodig</span>
-            <button className="signup-btn" onClick={openInput}>Ik doe mee</button>
+            <button className="signup-btn" onClick={() => setShowInput(true)}>Ik doe mee</button>
           </div>
         )}
       </div>
