@@ -292,7 +292,7 @@ body {
 }
 .signup-input-row input {
   border: 1px solid var(--border); border-radius: 8px;
-  padding: 6px 10px; font-size: 0.82rem;
+  padding: 6px 10px; font-size: 1rem;
   font-family: 'Merriweather Sans', sans-serif;
   flex: 1; min-width: 0;
 }
